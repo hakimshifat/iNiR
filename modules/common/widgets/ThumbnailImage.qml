@@ -42,6 +42,27 @@ StyledImage {
         }
     }
 
+    onSourcePathChanged: {
+        if (!sourcePath || sourcePath.length === 0) {
+            thumbnailGeneration.running = false;
+            root.source = "";
+            return;
+        }
+
+        root.source = root.thumbnailPath
+        if (!root.generateThumbnail) return;
+        thumbnailGeneration.running = false;
+        thumbnailGeneration.running = true;
+    }
+
+    onThumbnailSizeNameChanged: {
+        if (!sourcePath || sourcePath.length === 0) return;
+        root.source = root.thumbnailPath
+        if (!root.generateThumbnail) return;
+        thumbnailGeneration.running = false;
+        thumbnailGeneration.running = true;
+    }
+
     onSourceSizeChanged: {
         if (!root.generateThumbnail) return;
         thumbnailGeneration.running = false;
